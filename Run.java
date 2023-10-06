@@ -82,7 +82,7 @@ public class Run {
     }
 
     public static void addBook() {
-        String name, author, publisher; // Variables to store user input
+        String name, author, publisher, description; // Variables to store user input
 
         System.out.println("\nAdd Book To the Shelf");
 
@@ -96,12 +96,16 @@ public class Run {
         System.out.print("Enter publisher: ");
         publisher = input.nextLine();
 
+        System.out.print("Enter one line description: ");
+        description = input.nextLine();
+
         // Create new book and add it to the database
         Book newBook = new Book(1, "", "", "", "");
         newBook.setId(autoIdBook);
         newBook.setName(name);
         newBook.setAuthor(author);
         newBook.setPublisher(publisher);
+        newBook.setDescription(description);
         books.add(newBook);
 
         autoIdBook++; // Increment auto ID
@@ -130,7 +134,7 @@ public class Run {
 
         // Print the book details
         for (Book book : books) {
-            System.out.format(format, book.getId(), book.getName(), book.getAuthor());
+            System.out.format(format, book.getId(), book.getName(), book.getAuthor(), book.getPublisher());
         }
     }
 
