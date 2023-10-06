@@ -130,6 +130,25 @@ public class Run {
         }
     }
 
+    public static void deleteBook(ArrayList<Book> books) {
+        int targetBookId; // ID of the book to be deleted, from user input.
+        System.out.print("Enter Book ID to delete: ");
+        targetBookId = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        // Simply iterate through the list of books, remove book if ID matches
+        for (Book book : books) {
+
+            if (book.id == targetBookId) {
+                System.out.println("\nFound book " + book.name + ". Deleting!!!");
+                books.remove(book); // Remove by object
+                return;
+            }
+        }
+
+        System.out.println("\nNo such book found! Pleae check and try again.");
+    }
+
     public static void main(String[] args) {
         // Debug data
         Book book1 = new Book(-3, "Harry Potter", "JK Rowling", "Indigo");
@@ -159,6 +178,8 @@ public class Run {
                         addBook();
                     } else if (menuChoice.equals("l")) {
                         listBooks(books);
+                    } else if (menuChoice.equals("d")) {
+                        deleteBook(books);
                     }
 
                 } else if (menuChoice.equals("m")) {
