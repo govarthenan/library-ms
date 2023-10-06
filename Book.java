@@ -1,13 +1,14 @@
 public class Book {
-    int id;
-    String name, author, publisher;
+    private int id;
+    private String name, author, publisher, description;
 
     // Constructor
-    public Book(int id, String name, String author, String publisher) {
+    public Book(int id, String name, String author, String publisher, String description) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.publisher = publisher;
+        this.description = description;
     }
 
     // Getters
@@ -27,6 +28,10 @@ public class Book {
         return publisher;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     // Setters
     public void setId(int id) {
         this.id = id;
@@ -42,6 +47,10 @@ public class Book {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }
