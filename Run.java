@@ -18,11 +18,40 @@ public class Run {
 
     public static void printMainMenu() {
         // Print the menu for the user to choose from
-        System.out.println("Please choose which section to go to.");
+        System.out.println("\nPlease choose which section to go to.");
         System.out.println("- Books (b)");
         System.out.println("- Lendings (l)");
         System.out.println("- Members (m)");
         System.out.print("Your selection: ");
+    }
+
+    public static void printBookMenu() {
+        // Print the menu with book related options
+        System.out.println("\nPlease choose the operation");
+        System.out.println("- Add book (a)");
+        System.out.println("- Delete book by ID (d)");
+        System.out.println("- List existing books (l)");
+        System.out.println("- Search for a book info using ID (s)");
+        System.out.print("Your selection: ");
+    }
+
+    public static void printMemberMenu() {
+        // Print the menu with member related options
+        System.out.println("\nPlease choose the operation");
+        System.out.println("- Register member (a)");
+        System.out.println("- Delete a member using ID (d)");
+        System.out.println("- List existing members (l)");
+        System.out.println("- Search for member info using ID (s)");
+        System.out.println("Your selection: ");
+    }
+
+    public static void printLendingMenu() {
+        System.out.println("\nPlease choose the operation");
+        System.out.println("- Lend book with book and member IDs (a)");
+        System.out.println("- Return a lent book (d)");
+        System.out.println("- Show information about specific lending (i)");
+        System.out.println("- List lent books (l)");
+        System.out.println("- List overdue lendings (o)");
     }
 
     public static boolean validateMenuChoice(String choice) {
@@ -49,7 +78,14 @@ public class Run {
 
             // validate the user's selection
             if (validateMenuChoice(menuChoice)) {
-                System.out.println(menuChoice + "\n");
+                System.out.println(menuChoice + menuChoice.length());
+                if (menuChoice.equals("b")) {
+                    printBookMenu();
+                } else if (menuChoice.equals("m")) {
+                    printMemberMenu();
+                } else if (menuChoice.equals("l")) {
+                    printLendingMenu();
+                }
             } else {
                 System.out.print("Menu choice too long. Enter one character only.\n\n\n");
             }
