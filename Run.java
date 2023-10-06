@@ -44,7 +44,7 @@ public class Run {
         System.out.println("- Add book (a)");
         System.out.println("- Delete book by ID (d)");
         System.out.println("- List existing books (l)");
-        System.out.println("- Search for a book info using ID (s)");
+        System.out.println("- Search for books (s)");
         System.out.print("Your selection: ");
     }
 
@@ -157,6 +157,39 @@ public class Run {
         System.out.println("\nNo such book found! Pleae check and try again.");
     }
 
+    public static void searchBook(ArrayList<Book> books) {
+        // Get string to search from user
+        String searchString;
+        System.out.print("Enter string to search in one line: ");
+        searchString = input.nextLine();
+
+        // ArrayList to hold books that got a search hit
+        ArrayList<Book> searchResults = new ArrayList<Book>();
+
+        // Iterate through list of books and see if the search string is in any of the
+        // string attributes
+        for (Book book : books) {
+            if (book.getName().toLowerCase().contains(searchString)) {
+                searchResults.add(book);
+            } else if (book.getAuthor().toLowerCase().contains(searchString)) {
+                searchResults.add(book);
+            } else if (book.getPublisher().toLowerCase().contains(searchString)) {
+                searchResults.add(book);
+            } else if (book.getDescription().toLowerCase().contains(searchString)) {
+                searchResults.add(book);
+            }
+        }
+
+        // Display books if there are any search results
+        if (searchResults.size() > 0) {
+            System.out.println("\nDisplaying search results...");
+            listBooks(searchResults);
+        } else {
+            System.out.println("\nNo results found for this search!");
+        }
+
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -210,6 +243,8 @@ public class Run {
                         listBooks(books);
                     } else if (menuChoice.equals("d")) {
                         deleteBook(books);
+                    } else if (menuChoice.equals("s")) {
+                        searchBook(books);
                     }
 
                 } else if (menuChoice.equals("m")) {
