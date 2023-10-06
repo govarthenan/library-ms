@@ -7,23 +7,6 @@ public class Run {
     static Scanner input = new Scanner(System.in);
     static String menuChoice; // Get the user's selection
 
-    public static boolean validateMenuChoice(String choice) {
-        if (choice.length() == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static void printMainMenu() {
-        // Print the menu for the user to choose from
-        System.out.println("Please choose which section to go to.");
-        System.out.println("Books(b): ");
-        System.out.println("Members(m): ");
-        System.out.println("Lendings(l): ");
-        System.out.print("Your selection: ");
-    }
-
     public static void printWelcome() {
         // Print the welcome message for the user
         System.out.println("Hi, welcome to Library Management System!");
@@ -31,6 +14,29 @@ public class Run {
         System.out.println("At any time, you can press 'q' to exit the program.");
         System.out.println("Best of luck!");
         System.out.println("--------------------------------------------------\n");
+    }
+
+    public static void printMainMenu() {
+        // Print the menu for the user to choose from
+        System.out.println("Please choose which section to go to.");
+        System.out.println("- Books (b)");
+        System.out.println("- Lendings (l)");
+        System.out.println("- Members (m)");
+        System.out.print("Your selection: ");
+    }
+
+    public static boolean validateMenuChoice(String choice) {
+        // If 'q' was pressed, exit the program immediately
+        if (choice.equals("q")) {
+            System.out.println("\nExiting program...");
+            System.exit(0);
+        }
+
+        if (choice.length() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static void main(String[] args) {
