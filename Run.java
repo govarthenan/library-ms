@@ -82,7 +82,7 @@ public class Run {
     }
 
     public static void addBook() {
-        String name, author, publisher, description; // Variables to store user input
+        String name, author, publisher; // Variables to store user input
 
         System.out.println("\nAdd Book To the Shelf");
 
@@ -177,7 +177,7 @@ public class Run {
         book3.setName("Lord of the rings");
         book3.setAuthor("KR Tolkien");
         book3.setPublisher("Sarasavi");
-        book3.setDescription("Book about ancient civilizations in another world altogether")
+        book3.setDescription("Book about ancient civilizations in another world altogether");
 
         // Add debug data to books ArrayList
         books.add(book1);
