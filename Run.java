@@ -82,7 +82,7 @@ public class Run {
     }
 
     public static void addBook() {
-        String name, author, publisher; // Variables to store user input
+        String name, author, publisher, description; // Variables to store user input
 
         System.out.println("\nAdd Book To the Shelf");
 
@@ -97,7 +97,11 @@ public class Run {
         publisher = input.nextLine();
 
         // Create new book and add it to the database
-        Book newBook = new Book(autoIdBook, name, author, publisher);
+        Book newBook = new Book(1, "", "", "", "");
+        newBook.setId(autoIdBook);
+        newBook.setName(name);
+        newBook.setAuthor(author);
+        newBook.setPublisher(publisher);
         books.add(newBook);
 
         autoIdBook++; // Increment auto ID
@@ -126,7 +130,7 @@ public class Run {
 
         // Print the book details
         for (Book book : books) {
-            System.out.format(format, book.id, book.name, book.author, book.publisher);
+            System.out.format(format, book.getId(), book.getName(), book.getAuthor());
         }
     }
 
@@ -139,8 +143,8 @@ public class Run {
         // Simply iterate through the list of books, remove book if ID matches
         for (Book book : books) {
 
-            if (book.id == targetBookId) {
-                System.out.println("\nFound book " + book.name + ". Deleting!!!");
+            if (book.getId() == targetBookId) {
+                System.out.println("\nFound book " + book.getName() + ". Deleting!!!");
                 books.remove(book); // Remove by object
                 return;
             }
@@ -151,9 +155,31 @@ public class Run {
 
     public static void main(String[] args) {
         // Debug data
-        Book book1 = new Book(-3, "Harry Potter", "JK Rowling", "Indigo");
-        Book book2 = new Book(-2, "Percy Jackson", "Martin GR", "Pearson");
-        Book book3 = new Book(-1, "Lord of the rings", "KR Tolkien", "Sarasavi");
+        // Create instances with default values
+        Book book1 = new Book(0, "", "", "", "");
+        Book book2 = new Book(0, "", "", "", "");
+        Book book3 = new Book(0, "", "", "", "");
+
+        // Use setter methods to assign values to attributes
+        book1.setId(-3);
+        book1.setName("Harry Potter");
+        book1.setAuthor("JK Rowling");
+        book1.setPublisher("Indigo");
+        book1.setDescription("Book about muggles and wizards.");
+
+        book2.setId(-2);
+        book2.setName("Percy Jackson");
+        book2.setAuthor("Martin GR");
+        book2.setPublisher("Pearson");
+        book2.setDescription("Book about human children of ancient greek gods");
+
+        book3.setId(-1);
+        book3.setName("Lord of the rings");
+        book3.setAuthor("KR Tolkien");
+        book3.setPublisher("Sarasavi");
+        book3.setDescription("Book about ancient civilizations in another world altogether")
+
+        // Add debug data to books ArrayList
         books.add(book1);
         books.add(book2);
         books.add(book3);
