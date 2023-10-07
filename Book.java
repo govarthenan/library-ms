@@ -1,14 +1,16 @@
 public class Book {
     private int id;
     private String name, author, publisher, description;
+    boolean isAvailable;
 
     // Constructor
-    public Book(int id, String name, String author, String publisher, String description) {
+    public Book(int id, String name, String author, String publisher, String description, boolean isAvailable) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.publisher = publisher;
         this.description = description;
+        this.isAvailable = isAvailable;
     }
 
     // Getters
@@ -53,4 +55,11 @@ public class Book {
         this.description = description;
     }
 
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
 }
