@@ -138,4 +138,14 @@ public class Lending {
         return fine;
     }
 
+    public int overdueDays(int returnedDay, int returnedMonth, int returnedYear) {
+        // Calculate overdue period
+        int overdueDays = 0;
+        overdueDays += (returnedYear - this.getDue_year()) * 365;
+        overdueDays += (returnedMonth - this.getDue_month()) * 30;
+        overdueDays += (returnedDay - this.getDue_day());
+
+        return overdueDays;
+    }
+
 }
