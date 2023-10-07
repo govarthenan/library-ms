@@ -428,6 +428,78 @@ public class Run {
         }
     }
 
+    public static void showLendingInfo(ArrayList<Lending> lendings, ArrayList<Book> books,
+            ArrayList<Member> members) {
+        // Based on the lendingId, show all available information about the specific
+        // lending
+        // Concatenate the day, month and year values to show the date
+        // Print the book name and member name instead of their IDs
+        // Print the fine if there is one
+        // Since this method is run for only one lending, no need to print in a table
+        // format
+
+        // Get lending ID from user
+        System.out.print("Enter lending ID to show information about: ");
+        int lendingId = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        // Get and assign date values
+        int[] date = getDate();
+        int current_day, current_month, current_year;
+        current_day = date[0];
+        current_month = date[1];
+        current_year = date[2];
+
+        // Iterate through the list of lendings, find the lending with the given ID and
+        // return it
+        for (Lending lending : lendings) {
+            if (lending.getId() == lendingId) {
+                // Get book name
+                String bookName = "";
+                for (Book book : books) {
+                    if (book.getId() == lending.getBookId()) {
+                        bookName = book.getName();
+                        break;
+                    }
+                }
+
+                // Get member name
+                String memberName = "";
+                for (Member member : members) {
+                    if (member.getId() == lending.getMemberId()) {
+                        memberName = member.getName();
+                        break;
+                    }
+                }
+
+                // Calculate fine
+                double fine = lending.calculateFine(current_day, current_month, current_year);
+
+                // Print the lending information
+                System.out.println("\nLending ID: " + lending.getId());
+                System.out.println("Book ID: " + lending.getBookId());
+                System.out.println("Book Name: " + bookName);
+                System.out.println("Member ID: " + lending.getMemberId());
+                System.out.println("Member Name: " + memberName);
+                System.out.println("Due Date: " + lending.getDue_day() + "/" + lending.getDue_month() + "/"
+                        + lending.getDue_year());
+                System.out.println("Lending Date: " + lending.getLend_day() + "/" + lending.getLend_month() + "/"
+                        + lending.getLend_year());
+
+                if (lending.getReturn_day() != -1) {
+                    System.out.println("Return Date: " + lending.getReturn_day() + "/" + lending.getReturn_month()
+                            + "/" + lending.getReturn_year());
+                }
+
+                if (fine > 0) {
+                    System.out.println("Fine: Rs. " + fine);
+                }
+
+                return;
+            }
+        }
+
+    }
 
     public static void main(String[] args) {
         // Debug data
@@ -547,6 +619,8 @@ public class Run {
                         listLendings(lendings);
                     } else if (menuChoice.equals("o")) {
                         listOverdueLendings(lendings);
+                    } else if (menuChoice.equals("i")) {
+                        showLendingInfo(lendings, books, members);
                     }
                 }
 
