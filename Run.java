@@ -344,6 +344,47 @@ public class Run {
         toggleBookAvailability(bookId, false);
     }
 
+    public static void returnLending(ArrayList<Lending> lendings) {
+        // Get and assign date values
+        int[] date = getDate();
+        int current_day, current_month, current_year;
+        current_day = date[0];
+        current_month = date[1];
+        current_year = date[2];
+
+        // Get book ID from user
+        int bookId;
+        System.out.print("Enter book ID to return: ");
+        bookId = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        // Iterate through the list of lendings, find the lending with the given book
+        // ID and return it
+        for (Lending lending : lendings) {
+            if (lending.getBookId() == bookId) {
+                lending.setReturn_day(current_day);
+                lending.setReturn_month(current_month);
+                lending.setReturn_year(current_year);
+
+                // Delete lending from database
+                lendings.remove(lending);
+
+                // Calculate fine
+                double fine = lending.calculateFine(lending.getReturn_day(), lending.getReturn_month(),
+                        lending.getReturn_year());
+                if (fine > 0) {
+                    System.out.println("\nFine for this lending is Rs. " + fine);
+                }
+
+                // Toggle book availability
+                toggleBookAvailability(bookId, true);
+                return;
+            }
+        }
+
+        System.out.println("\nNo such book/lending found! Pleae check and try again.");
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -456,6 +497,8 @@ public class Run {
 
                     if (menuChoice.equals("a")) {
                         addLending();
+                    } else if (menuChoice.equals("d")) {
+                        returnLending(lendings);
                     }
                 }
 
