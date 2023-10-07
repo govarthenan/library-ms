@@ -12,10 +12,12 @@ public class Run {
     // Database
     static ArrayList<Book> books = new ArrayList<Book>();
     static ArrayList<Member> members = new ArrayList<Member>();
+    static ArrayList<Lending> lendings = new ArrayList<Lending>();
 
     // AutoID trackers
     static int autoIdBook = 0;
     static int autoIdMember = 0;
+    static int autoIdLending = 0;
 
     public static void printArrayList(ArrayList<?> list) { // DEBUG
         for (Object item : list) {
@@ -68,6 +70,7 @@ public class Run {
         System.out.println("- Show information about specific lending (i)");
         System.out.println("- List lent books (l)");
         System.out.println("- List overdue lendings (o)");
+        System.out.print("Your selection: ");
     }
 
     public static boolean validateMenuChoice(String choice) {
@@ -103,7 +106,7 @@ public class Run {
         description = input.nextLine();
 
         // Create new book and add it to the database
-        Book newBook = new Book(1, "", "", "", "");
+        Book newBook = new Book(1, "", "", "", "", true);
         newBook.setId(autoIdBook);
         newBook.setName(name);
         newBook.setAuthor(author);
@@ -275,12 +278,83 @@ public class Run {
         return date;
     }
 
+    public static void toggleBookAvailability(int bookId, boolean isAvailable) {
+        // Iterate through the list of books, find the book with the given ID and
+        // toggle its availability
+        for (Book book : books) {
+            if (book.getId() == bookId) {
+                book.setAvailable(isAvailable);
+                return;
+            }
+        }
+    }
+
+    public static void addLending() {
+        // Get and assign date values
+        int[] date = getDate();
+        int current_day, current_month, current_year;
+        current_day = date[0];
+        current_month = date[1];
+        current_year = date[2];
+
+        // Get book ID from user
+        int bookId;
+        System.out.print("Enter book ID to lend: ");
+        bookId = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        // Get member ID from user
+        int memberId;
+        System.out.print("Enter member ID to lend to: ");
+        memberId = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        // Get due day, month and year from user
+        int due_day, due_month, due_year;
+
+        System.out.print("Enter due day: ");
+        due_day = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        System.out.print("Enter due month: ");
+        due_month = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        System.out.print("Enter due year: ");
+        due_year = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        // Create new lending and add it to the database
+        Lending newLending = new Lending(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+        newLending.setId(autoIdLending);
+        newLending.setBookId(bookId);
+        newLending.setMemberId(memberId);
+        newLending.setDue_day(due_day);
+        newLending.setDue_month(due_month);
+        newLending.setDue_year(due_year);
+        newLending.setLend_day(current_day);
+        newLending.setLend_month(current_month);
+        newLending.setLend_year(current_year);
+
+        lendings.add(newLending); // Add it to the database
+
+        autoIdLending++; // Increment auto ID
+
+        // Toggle book availability
+        toggleBookAvailability(bookId, false);
+    }
+
+    public static void returnLending() {
+        // Get and assign date values
+
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
-        Book book1 = new Book(0, "", "", "", "");
-        Book book2 = new Book(0, "", "", "", "");
-        Book book3 = new Book(0, "", "", "", "");
+        Book book1 = new Book(0, "", "", "", "", true);
+        Book book2 = new Book(0, "", "", "", "", true);
+        Book book3 = new Book(0, "", "", "", "", true);
 
         // Use setter methods to assign values to attributes
         book1.setId(-3);
@@ -383,6 +457,13 @@ public class Run {
 
                 } else if (menuChoice.equals("l")) {
                     printLendingMenu();
+                    menuChoice = input.nextLine(); // User selection of operation
+
+                    if (menuChoice.equals("a")) {
+                        addLending();
+                    } else if (menuChoice.equals("d")) {
+                        returnLending(lendings);
+                    }
                 }
 
             } else {
