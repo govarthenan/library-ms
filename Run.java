@@ -56,7 +56,7 @@ public class Run {
         System.out.println("- Register member (a)");
         System.out.println("- Delete a member using ID (d)");
         System.out.println("- List existing members (l)");
-        System.out.println("- Search for member info using ID (s)");
+        System.out.println("- Search for member (s)");
         System.out.print("Your selection: ");
     }
 
@@ -228,6 +228,34 @@ public class Run {
         }
     }
 
+    public static void searchMember(ArrayList<Member> members) {
+        // Get string to search from user
+        String searchString;
+        System.out.print("Enter string to search: ");
+        searchString = input.nextLine().toLowerCase();
+
+        // ArrayList to hold books that got a search hit
+        ArrayList<Member> searchResults = new ArrayList<Member>();
+
+        // Iterate through list of books and see if the search string is in any of the
+        // string attributes
+        for (Member member : members) {
+            if (member.getName().toLowerCase().contains(searchString)) {
+                searchResults.add(member);
+            } else if (member.getEmail().toLowerCase().contains(searchString)) {
+                searchResults.add(member);
+            }
+        }
+
+        // Display books if there are any search results
+        if (searchResults.size() > 0) {
+            System.out.println("\nDisplaying search results...");
+            listMembers(searchResults);
+        } else {
+            System.out.println("\nNo results found for this search!");
+        }
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -258,6 +286,40 @@ public class Run {
         books.add(book1);
         books.add(book2);
         books.add(book3);
+
+        // Create 5 such members and add them to the members ArrayList
+        Member member1 = new Member(0, "", "");
+        Member member2 = new Member(0, "", "");
+        Member member3 = new Member(0, "", "");
+        Member member4 = new Member(0, "", "");
+        Member member5 = new Member(0, "", "");
+
+        member1.setId(-5);
+        member1.setName("John Doe");
+        member1.setEmail("jdoe@gm");
+        members.add(member1);
+
+        member2.setId(-4);
+        member2.setName("Gova Raja");
+        member2.setEmail("graja@ym");
+
+        member3.setId(-3);
+        member3.setName("Samantha");
+        member3.setEmail("sam@ym");
+
+        member4.setId(-2);
+        member4.setName("Tary Sam");
+        member4.setEmail("kamal@ym");
+
+        member5.setId(-1);
+        member5.setName("Nimal");
+        member5.setEmail("nimal@ym");
+
+        members.add(member1);
+        members.add(member2);
+        members.add(member3);
+        members.add(member4);
+        members.add(member5);
 
         // Run the program in a conitnuous loop unless user wants to exit
         printWelcome();
@@ -294,6 +356,8 @@ public class Run {
                         addMember();
                     } else if (menuChoice.equals("l")) {
                         listMembers(members);
+                    } else if (menuChoice.equals("s")) {
+                        searchMember(members);
                     }
 
                 } else if (menuChoice.equals("l")) {
