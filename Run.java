@@ -214,6 +214,20 @@ public class Run {
         autoIdBook++; // Increment auto ID
     }
 
+    public static void listMembers(ArrayList<Member> members) {
+        // Define the format for each column
+        String format = "%-10s %-20s %-20s%n";
+
+        // Print the header row
+        System.out.format(format, "Member ID", "Member Name", "Member Email");
+        System.out.format(format, "-------", "---------", "-----------");
+
+        // Print the book details
+        for (Member member : members) {
+            System.out.format(format, member.getId(), member.getName(), member.getEmail());
+        }
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -278,9 +292,9 @@ public class Run {
                     // See which operation the user input corresponds to and call it
                     if (menuChoice.equals("a")) {
                         addMember();
+                    } else if (menuChoice.equals("l")) {
+                        listMembers(members);
                     }
-
-                    printArrayList(members);
 
                 } else if (menuChoice.equals("l")) {
                     printLendingMenu();
