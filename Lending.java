@@ -117,4 +117,25 @@ public class Lending {
         this.return_year = return_year;
     }
 
+    public double calculateFine(int returnedDay, int returnedMonth, int returnedYear) {
+        // 50 per additional day for up to 7 days
+        // 100 per additional day after 7 days
+
+        // Calculate overdue period
+        int overdue_days = 0;
+        overdue_days += (returnedYear - this.getDue_year()) * 365;
+        overdue_days += (returnedMonth - this.getDue_month()) * 30;
+        overdue_days += (returnedDay - this.getDue_day());
+
+        // Calculate fine
+        double fine = 0;
+        if (overdue_days <= 7) {
+            fine = overdue_days * 50;
+        } else {
+            fine = 7 * 50 + (overdue_days - 7) * 100;
+        }
+
+        return fine;
+    }
+
 }
