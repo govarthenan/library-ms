@@ -2,6 +2,7 @@
 // Main source file that aggregates all other classes and runs the whole program
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Run {
     // Input scanner for menu navigation
@@ -260,6 +261,18 @@ public class Run {
         }
 
         System.out.println("\nNo such book found! Pleae check and try again.");
+    }
+
+    public static int[] getDate() {
+        Calendar calendar = Calendar.getInstance();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1; // Month is zero-based, so add 1
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // return array containing day, month and year
+        int[] date = { day, month, year };
+        return date;
     }
 
     public static void main(String[] args) {
