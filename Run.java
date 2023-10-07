@@ -344,11 +344,6 @@ public class Run {
         toggleBookAvailability(bookId, false);
     }
 
-    public static void returnLending() {
-        // Get and assign date values
-
-    }
-
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -461,8 +456,6 @@ public class Run {
 
                     if (menuChoice.equals("a")) {
                         addLending();
-                    } else if (menuChoice.equals("d")) {
-                        returnLending(lendings);
                     }
                 }
 
