@@ -403,6 +403,31 @@ public class Run {
 
     }
 
+    public static void listOverdueLendings(ArrayList<Lending> lendings) {
+        // Get and assign date values
+        int[] date = getDate();
+        int current_day, current_month, current_year;
+        current_day = date[0];
+        current_month = date[1];
+        current_year = date[2];
+
+        // Define the format for each column
+        String format = "%-10s %-10s %-10s %-15s%n";
+
+        // Print the header row
+        System.out.format(format, "Lending ID", "Book ID", "Member ID", "Overdue By");
+        System.out.format(format, "----------", "-------", "---------", "--------");
+
+        // Print the book details
+        for (Lending lending : lendings) {
+            int overdueBy = lending.overdueDays(current_day, current_month, current_year);
+
+            if (overdueBy > 0) {
+                System.out.format(format, lending.getId(), lending.getBookId(), lending.getMemberId(), overdueBy);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -519,6 +544,8 @@ public class Run {
                         returnLending(lendings);
                     } else if (menuChoice.equals("l")) {
                         listLendings(lendings);
+                    } else if (menuChoice.equals("o")) {
+                        listOverdueLendings(lendings);
                     }
                 }
 
