@@ -10,9 +10,11 @@ public class Run {
 
     // Database
     static ArrayList<Book> books = new ArrayList<Book>();
+    static ArrayList<Member> members = new ArrayList<Member>();
 
     // AutoID trackers
     static int autoIdBook = 0;
+    static int autoIdMember = 0;
 
     public static void printArrayList(ArrayList<?> list) { // DEBUG
         for (Object item : list) {
@@ -55,7 +57,7 @@ public class Run {
         System.out.println("- Delete a member using ID (d)");
         System.out.println("- List existing members (l)");
         System.out.println("- Search for member info using ID (s)");
-        System.out.println("Your selection: ");
+        System.out.print("Your selection: ");
     }
 
     public static void printLendingMenu() {
@@ -190,6 +192,28 @@ public class Run {
 
     }
 
+    public static void addMember() {
+        String name, email;
+
+        System.out.println("\nAdd a new member");
+
+        // Take input from user
+        System.out.print("Enter member name: ");
+        name = input.nextLine();
+
+        System.out.print("Enter email: ");
+        email = input.nextLine();
+
+        // Create new book and add it to the database
+        Member newMember = new Member(1, "", "");
+        newMember.setId(autoIdMember);
+        newMember.setName(name);
+        newMember.setEmail(email);
+        members.add(newMember);
+
+        autoIdBook++; // Increment auto ID
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -249,6 +273,15 @@ public class Run {
 
                 } else if (menuChoice.equals("m")) {
                     printMemberMenu();
+                    menuChoice = input.nextLine(); // User selection of operation
+
+                    // See which operation the user input corresponds to and call it
+                    if (menuChoice.equals("a")) {
+                        addMember();
+                    }
+
+                    printArrayList(members);
+
                 } else if (menuChoice.equals("l")) {
                     printLendingMenu();
                 }
