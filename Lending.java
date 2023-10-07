@@ -2,13 +2,13 @@ public class Lending {
     private int id, bookId, memberId, due_day, due_month, due_year;
 
     // Constructor
-    public Lending(int id, int bookId, int memberId, int day_of_month, int month, int year) {
+    public Lending(int id, int bookId, int memberId, int due_day, int due_month, int due_year) {
         this.id = id;
         this.bookId = bookId;
         this.memberId = memberId;
-        this.due_day = day_of_month;
-        this.due_month = month;
-        this.due_year = year;
+        this.due_day = due_day;
+        this.due_month = due_month;
+        this.due_year = due_year;
     }
 
     public int getId() {
