@@ -256,6 +256,25 @@ public class Run {
         }
     }
 
+    public static void deleteMember(ArrayList<Member> members) {
+        int targetMemberId; // ID of the book to be deleted, from user input.
+        System.out.print("Enter Member ID to delete: ");
+        targetMemberId = input.nextInt();
+        input.nextLine(); // consume newline character
+
+        // Simply iterate through the list of books, remove book if ID matches
+        for (Member member : members) {
+
+            if (member.getId() == targetMemberId) {
+                System.out.println("\nFound book " + member.getName() + ". Deleting!!!");
+                members.remove(member); // Remove by object
+                return;
+            }
+        }
+
+        System.out.println("\nNo such book found! Pleae check and try again.");
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -358,6 +377,8 @@ public class Run {
                         listMembers(members);
                     } else if (menuChoice.equals("s")) {
                         searchMember(members);
+                    } else if (menuChoice.equals("d")) {
+                        deleteMember(members);
                     }
 
                 } else if (menuChoice.equals("l")) {
