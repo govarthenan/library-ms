@@ -325,7 +325,7 @@ public class Run {
         input.nextLine(); // consume newline character
 
         // Create new lending and add it to the database
-        Lending newLending = new Lending(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+        Lending newLending = new Lending(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
         newLending.setId(autoIdLending);
         newLending.setBookId(bookId);
         newLending.setMemberId(memberId);
@@ -427,6 +427,7 @@ public class Run {
             }
         }
     }
+
 
     public static void main(String[] args) {
         // Debug data
