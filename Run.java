@@ -385,6 +385,24 @@ public class Run {
         System.out.println("\nNo such book/lending found! Pleae check and try again.");
     }
 
+    public static void listLendings(ArrayList<Lending> lendings) {
+        // Display lending ID, book ID, member ID, due date(concatenated)
+
+        // Define the format for each column
+        String format = "%-10s %-10s %-10s %-10s%n";
+
+        // Print the header row
+        System.out.format(format, "Lending ID", "Book ID", "Member ID", "Due Date");
+        System.out.format(format, "----------", "-------", "---------", "--------");
+
+        // Print the book details
+        for (Lending lending : lendings) {
+            System.out.format(format, lending.getId(), lending.getBookId(), lending.getMemberId(),
+                    lending.getDue_day() + "/" + lending.getDue_month() + "/" + lending.getDue_year());
+        }
+
+    }
+
     public static void main(String[] args) {
         // Debug data
         // Create instances with default values
@@ -499,6 +517,8 @@ public class Run {
                         addLending();
                     } else if (menuChoice.equals("d")) {
                         returnLending(lendings);
+                    } else if (menuChoice.equals("l")) {
+                        listLendings(lendings);
                     }
                 }
 
