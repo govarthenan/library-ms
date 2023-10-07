@@ -114,19 +114,6 @@ public class Run {
     }
 
     public static void listBooks(ArrayList<Book> books) {
-        // // Display a simple list of all the recorded books' full details
-        // System.out
-        // .println("\nBook ID" + "\t\t\t" + "Book Name" + "\t\t\t" + "Author Name" +
-        // "\t\t\t" + "Publisher Name");
-        // System.out.println("```````" + "\t\t\t" + "`````````" + "\t\t\t" +
-        // "```````````" + "\t\t\t" + "``````````````");
-        // // System.out.print("\n");
-
-        // for (Book book : books) {
-        // System.out.println(book.id + "\t\t\t" + book.name + "\t\t\t" + book.author +
-        // "\t\t\t" + book.publisher);
-        // }
-
         // Define the format for each column
         String format = "%-8s %-30s %-20s %-20s%n";
 
@@ -163,7 +150,7 @@ public class Run {
         // Get string to search from user
         String searchString;
         System.out.print("Enter string to search in one line: ");
-        searchString = input.nextLine();
+        searchString = input.nextLine().toLowerCase();
 
         // ArrayList to hold books that got a search hit
         ArrayList<Book> searchResults = new ArrayList<Book>();
